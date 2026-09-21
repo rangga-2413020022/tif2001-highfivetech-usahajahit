@@ -1,0 +1,44 @@
+name: CI Workflow
+
+# Tentukan kapan CI ini akan dijalankan (misalnya setiap ada yang push atau pull request ke branch main)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Menggunakan server virtual Linux dari GitHub
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x] # Menjalankan pengujian di beberapa versi Node.js sekaligus
+
+    steps:
+    # 1. Mengambil kode dari repository Anda
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Mengatur versi Node.js
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    # 3. Instal dependencies untuk Client (jika ada folder client)
+    - name: Install dependencies (Client)
+      run: |
+        cd client
+        npm install
+
+    # 4. Instal dependencies untuk Server (jika ada folder server)
+    - name: Install dependencies (Server)
+      run: |
+        cd server
+        npm install
+
+    # 5. Jalankan tes (jika nanti Anda membuat script test di package.json)
+    # - name: Run Tests
+    #   run: npm test
