@@ -1,0 +1,15 @@
+
+# Dependencies
+node_modules/
+
+# Environment dan rahasia
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+coverage/
+
+# Log
+npm-debug.log*

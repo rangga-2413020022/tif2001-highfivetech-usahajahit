@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Pelanggan from "./pages/pelanggan";
-import Pesanan from "./pages/pesanan";
+import Pesanan from "./pages/Pesanan";
 import Login from "./pages/Login";
 
 const menuItems = [
