@@ -3,7 +3,7 @@ name: CI Workflow
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "feat/server-auth-jwt"]
   pull_request:
     branches: ["main"]
 
@@ -24,23 +24,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-          cache-dependency-path: |
-            client/package-lock.json
-            server/package-lock.json
+          cache-dependency-path: server/package-lock.json
 
-      - name: Install dependencies (Client)
-        run: npm ci
-        working-directory: client
-
-      - name: Install dependencies (Server)
+      - name: Install server dependencies
         run: npm ci
         working-directory: server
-
-      # Aktifkan langkah pengujian setelah script test tersedia.
-      # - name: Run Client Tests
-      #   run: npm test
-      #   working-directory: client
-
-      # - name: Run Server Tests
-      #   run: npm test
-      #   working-directory: server
