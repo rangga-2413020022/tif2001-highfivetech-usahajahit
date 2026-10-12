@@ -1,9 +1,8 @@
-
 name: CI Workflow
 
 on:
   push:
-    branches: ["main", "feat/server-auth-jwt"]
+    branches: ["main"]
   pull_request:
     branches: ["main"]
 
@@ -19,13 +18,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
-          cache-dependency-path: server/package-lock.json
 
-      - name: Install server dependencies
+      - name: Install dependencies (Client)
+        run: npm ci
+        working-directory: client
+
+      - name: Install dependencies (Server)
         run: npm ci
         working-directory: server
