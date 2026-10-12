@@ -1,10 +1,12 @@
+
 name: CI Workflow
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "feat/server-auth-jwt"]
   pull_request:
     branches: ["main"]
+
 
 jobs:
   build-and-test:
