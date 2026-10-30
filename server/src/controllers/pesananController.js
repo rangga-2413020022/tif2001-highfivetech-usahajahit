@@ -65,3 +65,62 @@ exports.createPesanan = (req, res) => {
         });
     });
 };
+
+// 3. Update data pesanan berdasarkan id_pesanan
+exports.updatePesanan = (req, res) => {
+    const { id } = req.params;
+    const { 
+        jenis_jahitan, 
+        deskripsi_model, 
+        biaya_total, 
+        status_pelunasan, 
+        status_barang, 
+        prioritas, 
+        tanggal_masuk, 
+        tanggal_deadline 
+    } = req.body;
+
+    const query = `
+        UPDATE pesanan 
+        SET jenis_jahitan = ?, deskripsi_model = ?, biaya_total = ?, status_pelunasan = ?, status_barang = ?, prioritas = ?, tanggal_masuk = ?, tanggal_deadline = ? 
+        WHERE id_pesanan = ?
+    `;
+
+    const values = [
+        jenis_jahitan, 
+        deskripsi_model || null, 
+        biaya_total, 
+        status_pelunasan, 
+        status_barang, 
+        prioritas, 
+        tanggal_masuk, 
+        tanggal_deadline, 
+        id
+    ];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Pesanan tidak ditemukan!' });
+        }
+        res.json({ message: 'Data pesanan berhasil diperbarui' });
+    });
+};
+
+// 4. Hapus pesanan berdasarkan id_pesanan
+exports.deletePesanan = (req, res) => {
+    const { id } = req.params;
+    const query = 'DELETE FROM pesanan WHERE id_pesanan = ?';
+
+    db.query(query, [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Pesanan tidak ditemukan!' });
+        }
+        res.json({ message: 'Data pesanan berhasil dihapus' });
+    });
+};
