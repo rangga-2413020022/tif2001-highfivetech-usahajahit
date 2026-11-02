@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Usaha Jahit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Aplikasi Manajemen Usaha Jahit</h1>
+        <p>Kelola Data Pelanggan & Pesanan Jahitan</p>
+    </header>
+
+    <main class="container">
+        <!-- Form Tambah Pelanggan -->
+        <section class="card">
+            <h2>Tambah Pelanggan Baru</h2>
+            <form id="formPelanggan">
+                <div class="form-group">
+                    <label>No. HP (WhatsApp):</label>
+                    <input type="text" id="pelanggan_no_hp" required placeholder="08123456789">
+                </div>
+                <div class="form-group">
+                    <label>Nama Pelanggan:</label>
+                    <input type="text" id="pelanggan_nama" required placeholder="Nama Lengkap">
+                </div>
+                <div class="form-group">
+                    <label>Alamat:</label>
+                    <textarea id="pelanggan_alamat" placeholder="Alamat Pelanggan"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Panjang Baju (cm):</label>
+                        <input type="number" id="p_baju">
+                    </div>
+                    <div class="form-group">
+                        <label>Lingkar Dada (cm):</label>
+                        <input type="number" id="l_dada">
+                    </div>
+                    <div class="form-group">
+                        <label>Panjang Lengan (cm):</label>
+                        <input type="number" id="p_lengan">
+                    </div>
+                    <div class="form-group">
+                        <label>Lebar Pundak (cm):</label>
+                        <input type="number" id="l_pundak">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Catatan Ukuran:</label>
+                    <input type="text" id="catatan_ukuran" placeholder="Misal: Minta agak longgar">
+                </div>
+                <button type="submit" class="btn btn-primary">Simpan Pelanggan</button>
+            </form>
+        </section>
+
+        <!-- Form Tambah Pesanan -->
+        <section class="card">
+            <h2>Buat Pesanan Baru</h2>
+            <form id="formPesanan">
+                <div class="form-group">
+                    <label>Pilih Pelanggan (No. HP):</label>
+                    <select id="pesanan_no_hp" required>
+                        <option value="">-- Pilih Pelanggan --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Jahitan:</label>
+                    <input type="text" id="jenis_jahitan" required placeholder="Kemeja / Gaun / Celana">
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi Model / Catatan:</label>
+                    <textarea id="deskripsi_model" placeholder="Model kerah V, ada saku depan"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Biaya Total (Rp):</label>
+                        <input type="number" id="biaya_total" required placeholder="150000">
+                    </div>
+                    <div class="form-group">
+                        <label>Status Pelunasan:</label>
+                        <select id="status_pelunasan">
+                            <option value="Belum Lunas">Belum Lunas</option>
+                            <option value="DP">DP</option>
+                            <option value="Lunas">Lunas</option>
