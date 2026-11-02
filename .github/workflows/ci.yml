@@ -1,0 +1,41 @@
+name: Continuous Integration (CI)
+
+on:
+  push:
+    branches: [ dev, main ]
+  pull_request:
+    branches: [ dev, main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    # 1. Ambil kode dari repository
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # 2. Setup Node.js sesuai versi matrix
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: server/package-lock.json
+
+    # 3. Masuk ke folder server dan install dependencies
+    - name: Install Dependencies (Server)
+      run: |
+        cd server
+        npm install
+
+    # 4. Jalankan script test atau build (jika ada di package.json server)
+    - name: Run Server Build/Test Check
+      run: |
+        cd server
+        # npm test  # Uncomment baris ini jika sudah ada skrip test di package.json
+        node -c server.js # Cek syntax error dasar pada file utama server
